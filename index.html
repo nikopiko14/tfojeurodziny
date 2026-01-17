@@ -46,6 +46,7 @@
             border-radius: 8px;
             background: crimson;
             color: white;
+            margin: 10px;
         }
 
         #output {
@@ -59,7 +60,6 @@
             display: none;
         }
 
-        /* 🔥 DUŻE–MAŁE */
         .duzemale {
             animation: duzemale 0.8s ease-in-out infinite;
         }
@@ -68,6 +68,11 @@
             0%   { transform: scale(1); }
             50%  { transform: scale(2); }
             100% { transform: scale(1); }
+        }
+
+        #answers img {
+            width: 200px;
+            margin: 10px;
         }
     </style>
 </head>
@@ -78,7 +83,14 @@
 
 <div id="output" class="hidden"></div>
 
-<br><br>
+<div id="buttons" class="hidden">
+    <button id="yes">TAK</button>
+    <button id="no">NIE</button>
+</div>
+
+<div id="answers" class="hidden"></div>
+
+<br>
 
 <button id="btn">nie klikaj mnie</button>
 
@@ -90,33 +102,58 @@
         "Miałaś kurewko nie klikać",
         "Co ty kurwo",
         "Pierdol się",
-        "Nie pojebało ci sie coś?"
+        "Nie pojebało ci sie coś?",
+        "Czy ty jesteś jakaś pierdolnięta?"
     ];
 
     const btn = document.getElementById("btn");
     const rotatingText = document.getElementById("rotatingText");
     const output = document.getElementById("output");
     const sound = document.getElementById("sound");
+    const buttons = document.getElementById("buttons");
+    const answers = document.getElementById("answers");
 
     btn.addEventListener("click", () => {
-        // zatrzymaj animację napisu
         rotatingText.style.display = "none";
+        buttons.classList.add("hidden");
+        answers.classList.add("hidden");
+        answers.innerHTML = "";
 
-        // losowy tekst
-        const randomIndex = Math.floor(Math.random() * texts.length);
-        output.textContent = texts[randomIndex];
+        const text = texts[Math.floor(Math.random() * texts.length)];
+
+        output.textContent = text;
         output.classList.remove("hidden");
-
-        // animacja duże–małe
         output.classList.add("duzemale");
 
-        // dźwięk na MAX (przeglądarkowe)
         sound.volume = 1;
         sound.currentTime = 0;
         sound.play();
+
+        if (text === "Czy ty jesteś jakaś pierdolnięta?") {
+            buttons.classList.remove("hidden");
+        }
+    });
+
+    document.getElementById("yes").addEventListener("click", () => {
+        buttons.classList.add("hidden");
+        answers.classList.remove("hidden");
+        answers.innerHTML = `
+            <div style="font-size:48px;margin-bottom:20px;">widać</div>
+            <img src="https://via.placeholder.com/200">
+            <img src="https://via.placeholder.com/200">
+        `;
+    });
+
+    document.getElementById("no").addEventListener("click", () => {
+        buttons.classList.add("hidden");
+        answers.classList.remove("hidden");
+        answers.innerHTML = `
+            <div style="font-size:48px;margin-bottom:20px;">no nie sądzę</div>
+            <img src="https://via.placeholder.com/200">
+            <img src="https://via.placeholder.com/200">
+        `;
     });
 </script>
 
 </body>
 </html>
-
