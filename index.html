@@ -134,7 +134,9 @@
 
         if (text === "Czy ty jesteś jakaś pierdolnięta?") {
             buttons.classList.remove("hidden");
-            output.classList.add("hidden");
+            buttons.addEventListener("click", () => {
+                buttons.classList.add("hidden");
+            }
         }
     });
 
@@ -161,5 +163,6 @@
 
 </body>
 </html>
+
 
 
