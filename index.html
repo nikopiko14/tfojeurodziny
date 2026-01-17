@@ -74,6 +74,9 @@
             width: 200px;
             margin: 10px;
         }
+        #yes {
+            background: green;
+        }
     </style>
 </head>
 
@@ -131,6 +134,7 @@
 
         if (text === "Czy ty jesteś jakaś pierdolnięta?") {
             buttons.classList.remove("hidden");
+            output.classList.add("hidden");
         }
     });
 
@@ -138,7 +142,7 @@
         buttons.classList.add("hidden");
         answers.classList.remove("hidden");
         answers.innerHTML = `
-            <div style="font-size:48px;margin-bottom:20px;">widać</div>
+            <div style="font-size:48px;margin-bottom:20px;">No widać właśnie</div>
             <img src="idiot1.jpg">
             <img src="idiot2.jpg">
         `;
@@ -148,7 +152,7 @@
         buttons.classList.add("hidden");
         answers.classList.remove("hidden");
         answers.innerHTML = `
-            <div style="font-size:48px;margin-bottom:20px;">no nie sądzę</div>
+            <div style="font-size:48px;margin-bottom:20px;">No nie sądzę</div>
             <img src="idiot1.jpg">
             <img src="idiot2.jpg">
         `;
@@ -157,4 +161,5 @@
 
 </body>
 </html>
+
 
