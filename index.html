@@ -49,6 +49,8 @@
             margin: 10px;
         }
 
+        #yes { background: green; }
+
         #output {
             margin-top: 30px;
             text-align: center;
@@ -56,9 +58,7 @@
             font-weight: bold;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
 
         .duzemale {
             animation: duzemale 0.8s ease-in-out infinite;
@@ -73,9 +73,6 @@
         #answers img {
             width: 200px;
             margin: 10px;
-        }
-        #yes {
-            background: green;
         }
     </style>
 </head>
@@ -117,56 +114,50 @@
     const answers = document.getElementById("answers");
 
     btn.addEventListener("click", () => {
+        // reset
         rotatingText.style.display = "none";
         buttons.classList.add("hidden");
         answers.classList.add("hidden");
         answers.innerHTML = "";
 
+        output.classList.remove("hidden", "duzemale");
+
         const text = texts[Math.floor(Math.random() * texts.length)];
 
         output.textContent = text;
-        output.classList.remove("hidden");
         output.classList.add("duzemale");
 
-        sound.volume = 1;
         sound.currentTime = 0;
+        sound.volume = 1;
         sound.play();
 
         if (text === "Czy ty jesteś jakaś pierdolnięta?") {
             buttons.classList.remove("hidden");
-            buttons.addEventListener("click", () => {
-                buttons.classList.add("hidden");
-            }
         }
     });
 
     document.getElementById("yes").addEventListener("click", () => {
-    output.classList.add("hidden");   // ← TO DODAĆ
-    buttons.classList.add("hidden");
-    answers.classList.remove("hidden");
-    answers.innerHTML = `
-        <div style="font-size:48px;margin-bottom:20px;">No widać właśnie</div>
-        <img src="idiot1.jpg">
-        <img src="idiot2.jpg">
-    `;
-});
+        output.classList.add("hidden");
+        buttons.classList.add("hidden");
+        answers.classList.remove("hidden");
+        answers.innerHTML = `
+            <div style="font-size:48px;margin-bottom:20px;">No widać właśnie</div>
+            <img src="idiot1.jpg">
+            <img src="idiot2.jpg">
+        `;
+    });
 
-document.getElementById("no").addEventListener("click", () => {
-    output.classList.add("hidden");   // ← TO DODAĆ
-    buttons.classList.add("hidden");
-    answers.classList.remove("hidden");
-    answers.innerHTML = `
-        <div style="font-size:48px;margin-bottom:20px;">No nie sądzę</div>
-        <img src="idiot1.jpg">
-        <img src="idiot2.jpg">
-    `;
-});
-
+    document.getElementById("no").addEventListener("click", () => {
+        output.classList.add("hidden");
+        buttons.classList.add("hidden");
+        answers.classList.remove("hidden");
+        answers.innerHTML = `
+            <div style="font-size:48px;margin-bottom:20px;">No nie sądzę</div>
+            <img src="idiot1.jpg">
+            <img src="idiot2.jpg">
+        `;
+    });
 </script>
 
 </body>
 </html>
-
-
-
-
