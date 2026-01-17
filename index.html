@@ -141,28 +141,32 @@
     });
 
     document.getElementById("yes").addEventListener("click", () => {
-        buttons.classList.add("hidden");
-        answers.classList.remove("hidden");
-        answers.innerHTML = `
-            <div style="font-size:48px;margin-bottom:20px;">No widać właśnie</div>
-            <img src="idiot1.jpg">
-            <img src="idiot2.jpg">
-        `;
-    });
+    output.classList.add("hidden");   // ← TO DODAĆ
+    buttons.classList.add("hidden");
+    answers.classList.remove("hidden");
+    answers.innerHTML = `
+        <div style="font-size:48px;margin-bottom:20px;">No widać właśnie</div>
+        <img src="idiot1.jpg">
+        <img src="idiot2.jpg">
+    `;
+});
 
-    document.getElementById("no").addEventListener("click", () => {
-        buttons.classList.add("hidden");
-        answers.classList.remove("hidden");
-        answers.innerHTML = `
-            <div style="font-size:48px;margin-bottom:20px;">No nie sądzę</div>
-            <img src="idiot1.jpg">
-            <img src="idiot2.jpg">
-        `;
-    });
+document.getElementById("no").addEventListener("click", () => {
+    output.classList.add("hidden");   // ← TO DODAĆ
+    buttons.classList.add("hidden");
+    answers.classList.remove("hidden");
+    answers.innerHTML = `
+        <div style="font-size:48px;margin-bottom:20px;">No nie sądzę</div>
+        <img src="idiot1.jpg">
+        <img src="idiot2.jpg">
+    `;
+});
+
 </script>
 
 </body>
 </html>
+
 
 
 
