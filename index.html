@@ -23,6 +23,9 @@
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 30px;
+        }
+
+        .rotate {
             animation: spin 3s linear infinite, zmiana 3s linear infinite;
         }
 
@@ -81,9 +84,8 @@
 
 <body>
 
-<div id="rotatingText">STO LAT GŁĄBIE</div>
+<div id="rotatingText" class="hidden">STO LAT GŁĄBIE</div>
 
-<!-- START -->
 <button id="startBtn">gotowa?</button>
 
 <div id="output" class="hidden"></div>
@@ -119,11 +121,19 @@
     const buttons = document.getElementById("buttons");
     const answers = document.getElementById("answers");
 
-    // START – muzyka + pokazanie przycisku
     startBtn.addEventListener("click", () => {
-        music.volume = 1;
-        music.play();
         startBtn.style.display = "none";
+
+        // pokaz obracany tekst
+        rotatingText.classList.remove("hidden");
+        rotatingText.classList.add("rotate");
+
+        // muzyka po 5 sekundach
+        setTimeout(() => {
+            music.volume = 1;
+            music.play();
+        }, 5000);
+
         btn.classList.remove("hidden");
     });
 
@@ -173,4 +183,3 @@
 
 </body>
 </html>
-
