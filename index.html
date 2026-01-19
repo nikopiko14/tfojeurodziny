@@ -50,6 +50,7 @@
         }
 
         #yes { background: green; }
+        #no { background: crimson; }
 
         #output {
             margin-top: 30px;
@@ -81,6 +82,9 @@
 
 <div id="rotatingText">STO LAT GŁĄBIE</div>
 
+<!-- START -->
+<button id="startBtn">gotowa?</button>
+
 <div id="output" class="hidden"></div>
 
 <div id="buttons" class="hidden">
@@ -90,10 +94,9 @@
 
 <div id="answers" class="hidden"></div>
 
-<br>
+<button id="btn" class="hidden">nie klikaj mnie</button>
 
-<button id="btn">nie klikaj mnie</button>
-
+<audio id="music" src="muzyka.mp3" loop></audio>
 <audio id="sound" src="kurwa.mp3"></audio>
 
 <script>
@@ -106,15 +109,24 @@
         "Czy ty jesteś jakaś pierdolnięta?"
     ];
 
+    const startBtn = document.getElementById("startBtn");
     const btn = document.getElementById("btn");
     const rotatingText = document.getElementById("rotatingText");
     const output = document.getElementById("output");
     const sound = document.getElementById("sound");
+    const music = document.getElementById("music");
     const buttons = document.getElementById("buttons");
     const answers = document.getElementById("answers");
 
+    // START – muzyka + pokazanie przycisku
+    startBtn.addEventListener("click", () => {
+        music.volume = 1;
+        music.play();
+        startBtn.style.display = "none";
+        btn.classList.remove("hidden");
+    });
+
     btn.addEventListener("click", () => {
-        // reset
         rotatingText.style.display = "none";
         buttons.classList.add("hidden");
         answers.classList.add("hidden");
@@ -123,7 +135,6 @@
         output.classList.remove("hidden", "duzemale");
 
         const text = texts[Math.floor(Math.random() * texts.length)];
-
         output.textContent = text;
         output.classList.add("duzemale");
 
