@@ -122,15 +122,19 @@
     const answers = document.getElementById("answers");
 
     startBtn.addEventListener("click", () => {
-        startBtn.style.display = "none";
+    startBtn.style.display = "none";
 
-        // pokaz obracany tekst
-        rotatingText.classList.remove("hidden");
-        rotatingText.classList.add("rotate");
+    rotatingText.classList.remove("hidden");
+    rotatingText.classList.add("rotate");
 
+    // >>> DODAJ TO <<<
+    music.currentTime = 5;
+    music.volume = 1;
+    music.play().catch(e => console.log("Autoplay blocked:", e));
 
-        btn.classList.remove("hidden");
-    });
+    btn.classList.remove("hidden");
+});
+
 
     btn.addEventListener("click", () => {
     rotatingText.style.display = "none";
@@ -179,5 +183,6 @@
 
 </body>
 </html>
+
 
 
