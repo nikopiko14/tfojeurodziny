@@ -138,25 +138,26 @@
     });
 
     btn.addEventListener("click", () => {
-        rotatingText.style.display = "none";
-        buttons.classList.add("hidden");
-        answers.classList.add("hidden");
-        answers.innerHTML = "";
+    rotatingText.style.display = "none";
+    buttons.classList.add("hidden");
+    answers.classList.add("hidden");
+    answers.innerHTML = "";
 
-        output.classList.remove("hidden", "duzemale");
+    output.classList.remove("hidden", "duzemale");
 
-        const text = texts[Math.floor(Math.random() * texts.length)];
-        output.textContent = text;
-        output.classList.add("duzemale");
+    const text = texts[Math.floor(Math.random() * texts.length)];
+    output.textContent = text;
+    output.classList.add("duzemale");
 
-        sound.currentTime = 0;
-        sound.volume = 1;
-        sound.play();
+    sound.currentTime = 5;
+    sound.volume = 1;
 
-        if (text === "Czy ty jesteś jakaś pierdolnięta?") {
-            buttons.classList.remove("hidden");
-        }
-    });
+
+    if (text === "Czy ty jesteś jakaś pierdolnięta?") {
+        buttons.classList.remove("hidden");
+    }
+});
+
 
     document.getElementById("yes").addEventListener("click", () => {
         output.classList.add("hidden");
@@ -183,3 +184,4 @@
 
 </body>
 </html>
+
