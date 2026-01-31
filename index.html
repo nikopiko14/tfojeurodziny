@@ -55,6 +55,7 @@
 
         #yes { background: green; }
         #no { background: crimson; }
+        #changeMusicBtn { background: dodgerblue; }
 
         #output {
             margin-top: 30px;
@@ -98,8 +99,11 @@
 <div id="answers" class="hidden"></div>
 
 <button id="btn" class="hidden">nie klikaj mnie</button>
+<button id="changeMusicBtn" class="hidden">zmień muzykę</button>
 
-<audio id="music" src="muzyka.mp3" loop></audio>
+<!-- AUDIO -->
+<audio id="music1" src="muzyka.mp3" loop></audio>
+<audio id="music2" src="muzyka2.mp3" loop></audio>
 <audio id="sound" src="kurwa.mp3"></audio>
 
 <script>
@@ -117,45 +121,54 @@
     const rotatingText = document.getElementById("rotatingText");
     const output = document.getElementById("output");
     const sound = document.getElementById("sound");
-    const music = document.getElementById("music");
     const buttons = document.getElementById("buttons");
     const answers = document.getElementById("answers");
+    const changeMusicBtn = document.getElementById("changeMusicBtn");
+
+    const music1 = document.getElementById("music1");
+    const music2 = document.getElementById("music2");
+
+    let currentMusic = 1;
 
     startBtn.addEventListener("click", () => {
-    startBtn.style.display = "none";
+        startBtn.style.display = "none";
 
-    rotatingText.classList.remove("hidden");
-    rotatingText.classList.add("rotate");
+        rotatingText.classList.remove("hidden");
+        rotatingText.classList.add("rotate");
 
-    music.currentTime = 69.7;
-    music.volume = 1;
-    music.play().catch(e => console.log("Autoplay blocked:", e));
+        // 🎵 osobne start timy
+        music1.currentTime = 69.7;
+        music2.currentTime = 28;
 
-    btn.classList.remove("hidden");
-});
+        music1.volume = 1;
+        music2.volume = 1;
 
+        music1.play().catch(e => console.log("Autoplay blocked:", e));
+
+        btn.classList.remove("hidden");
+        changeMusicBtn.classList.remove("hidden");
+    });
 
     btn.addEventListener("click", () => {
-    rotatingText.style.display = "none";
-    buttons.classList.add("hidden");
-    answers.classList.add("hidden");
-    answers.innerHTML = "";
+        rotatingText.style.display = "none";
+        buttons.classList.add("hidden");
+        answers.classList.add("hidden");
+        answers.innerHTML = "";
 
-    output.classList.remove("hidden", "duzemale");
+        output.classList.remove("hidden", "duzemale");
 
-    const text = texts[Math.floor(Math.random() * texts.length)];
-    output.textContent = text;
-    output.classList.add("duzemale");
+        const text = texts[Math.floor(Math.random() * texts.length)];
+        output.textContent = text;
+        output.classList.add("duzemale");
 
-    sound.currentTime = 0;
-    sound.volume = 1;
-    sound.play();
+        sound.currentTime = 0;
+        sound.volume = 1;
+        sound.play();
 
-    if (text === "Czy ty jesteś jakaś pierdolnięta?") {
-        buttons.classList.remove("hidden");
-    }
-});
-
+        if (text === "Czy ty jesteś jakaś pierdolnięta?") {
+            buttons.classList.remove("hidden");
+        }
+    });
 
     document.getElementById("yes").addEventListener("click", () => {
         output.classList.add("hidden");
@@ -178,16 +191,20 @@
             <img src="idiot2.jpg">
         `;
     });
+
+    // 🔁 przełączanie muzyki (każda pamięta swój czas)
+    changeMusicBtn.addEventListener("click", () => {
+        if (currentMusic === 1) {
+            music1.pause();
+            music2.play();
+            currentMusic = 2;
+        } else {
+            music2.pause();
+            music1.play();
+            currentMusic = 1;
+        }
+    });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
