@@ -130,20 +130,30 @@
 
     let currentMusic = 1;
 
-    startBtn.addEventListener("click", () => {
+    // ▶️ START (klik użytkownika = unlock audio na mobile)
+    startBtn.addEventListener("click", async () => {
         startBtn.style.display = "none";
 
         rotatingText.classList.remove("hidden");
         rotatingText.classList.add("rotate");
 
-        // 🎵 osobne start timy
+        // startowe czasy
         music1.currentTime = 69.7;
         music2.currentTime = 28.35;
 
         music1.volume = 1;
-        music2.volume = 1;
+        music2.volume = 0; // chwilowo cisza (unlock)
 
-        music1.play().catch(e => console.log("Autoplay blocked:", e));
+        try {
+            await music1.play();
+
+            // 🔓 unlock drugiej muzyki dla telefonów
+            await music2.play();
+            music2.pause();
+            music2.volume = 1;
+        } catch (e) {
+            console.log("Autoplay blocked:", e);
+        }
 
         btn.classList.remove("hidden");
         changeMusicBtn.classList.remove("hidden");
@@ -192,7 +202,7 @@
         `;
     });
 
-    // 🔁 przełączanie muzyki (każda pamięta swój czas)
+    // 🔁 przełączanie muzyki (działa też na telefonie)
     changeMusicBtn.addEventListener("click", () => {
         if (currentMusic === 1) {
             music1.pause();
@@ -208,4 +218,3 @@
 
 </body>
 </html>
-
