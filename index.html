@@ -102,8 +102,7 @@
 <button id="changeMusicBtn" class="hidden">zmień muzykę</button>
 
 <!-- AUDIO -->
-<audio id="music1" src="muzyka.mp3" loop></audio>
-<audio id="music2" src="muzyka2.mp3" loop></audio>
+<audio id="music" loop></audio>
 <audio id="sound" src="kurwa.mp3"></audio>
 
 <script>
@@ -125,35 +124,32 @@
     const answers = document.getElementById("answers");
     const changeMusicBtn = document.getElementById("changeMusicBtn");
 
-    const music1 = document.getElementById("music1");
-    const music2 = document.getElementById("music2");
+    const music = document.getElementById("music");
 
-    let currentMusic = 1;
+    let currentTrack = 1;
 
-    // ▶️ START (klik użytkownika = unlock audio na mobile)
-    startBtn.addEventListener("click", async () => {
-        startBtn.style.display = "none";
+    const trackData = {
+        1: { src: "muzyka.mp3", startTime: 69.7 },
+        2: { src: "muzyka2.mp3", startTime: 28.35 }
+    };
 
-        rotatingText.classList.remove("hidden");
-        rotatingText.classList.add("rotate");
-
-        // startowe czasy
-        music1.currentTime = 69.7;
-        music2.currentTime = 28.35;
-
-        music1.volume = 1;
-        music2.volume = 0; // chwilowo cisza (unlock)
-
+    async function playMusic(track) {
+        music.src = trackData[track].src;
+        music.currentTime = trackData[track].startTime;
         try {
-            await music1.play();
-
-            // 🔓 unlock drugiej muzyki dla telefonów
-            await music2.play();
-            music2.pause();
-            music2.volume = 1;
+            await music.play();
         } catch (e) {
             console.log("Autoplay blocked:", e);
         }
+    }
+
+    // ▶️ START
+    startBtn.addEventListener("click", async () => {
+        startBtn.style.display = "none";
+        rotatingText.classList.remove("hidden");
+        rotatingText.classList.add("rotate");
+
+        await playMusic(currentTrack);
 
         btn.classList.remove("hidden");
         changeMusicBtn.classList.remove("hidden");
@@ -202,17 +198,10 @@
         `;
     });
 
-    // 🔁 przełączanie muzyki (działa też na telefonie)
-    changeMusicBtn.addEventListener("click", () => {
-        if (currentMusic === 1) {
-            music1.pause();
-            music2.play();
-            currentMusic = 2;
-        } else {
-            music2.pause();
-            music1.play();
-            currentMusic = 1;
-        }
+    // 🔁 zmiana muzyki
+    changeMusicBtn.addEventListener("click", async () => {
+        currentTrack = currentTrack === 1 ? 2 : 1;
+        await playMusic(currentTrack);
     });
 </script>
 
